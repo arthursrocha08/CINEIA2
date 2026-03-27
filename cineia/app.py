@@ -309,6 +309,36 @@ st.markdown(
 
     /* ── Hide Streamlit chrome ──────────────────────── */
     #MainMenu, footer, header { visibility: hidden; }
+
+    /* ── Reexibe o botão de reabrir a sidebar ────────── */
+    [data-testid="collapsedControl"] {
+        visibility: visible !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: linear-gradient(135deg, #f5c842, #e8a020) !important;
+        border-radius: 0 8px 8px 0 !important;
+        width: 2rem !important;
+        height: 2.8rem !important;
+        top: 50% !important;
+        left: 0 !important;
+        position: fixed !important;
+        transform: translateY(-50%) !important;
+        box-shadow: 3px 0 16px rgba(245,200,66,0.35) !important;
+        cursor: pointer !important;
+        z-index: 999 !important;
+        transition: box-shadow 0.25s ease, transform 0.25s ease !important;
+    }
+    [data-testid="collapsedControl"]:hover {
+        box-shadow: 4px 0 24px rgba(245,200,66,0.6) !important;
+        transform: translateY(-50%) translateX(2px) !important;
+    }
+    [data-testid="collapsedControl"] svg {
+        fill: #0c0c0f !important;
+        stroke: #0c0c0f !important;
+        width: 1rem !important;
+        height: 1rem !important;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -363,24 +393,17 @@ with st.sidebar:
 
 # ─── FUNÇÃO: PARSEAR FILMES ────────────────────────────────────────────────────
 def parse_filmes(texto: str):
-    """
-    Tenta extrair blocos de filmes do texto retornado pela IA.
-    Retorna lista de dicts {titulo, ano, motivo} ou None se não parsear.
-    """
     filmes = []
-    # Divide por numeração (1., 2., 3. ou **1., etc.)
     blocos = re.split(r'\n(?=\*{0,2}\d+[\.\)])', texto.strip())
     for bloco in blocos:
         bloco = bloco.strip()
         if not bloco:
             continue
-        # Título (linha que pode ter **Título (Ano)** ou Título - Ano)
         titulo_match = re.search(
             r'(?:\*{1,2})?(?:\d+[\.\)]\s*)?(?:\*{1,2})?\*{0,2}([^\n\(\*]+?)(?:\s*[\(\-–]\s*(\d{4})\s*[\)\-–]?)?\*{0,2}\n',
             bloco + "\n"
         )
         ano_match = re.search(r'[\(\-–]\s*(\d{4})\s*[\)\-–]', bloco)
-        # Motivo: linha após traço ou "motivo:"
         motivo_match = re.search(
             r'(?:motivo|why|porque|por que|combina|por ser|pois)[:\s\-–]+(.+)',
             bloco, re.IGNORECASE
@@ -423,7 +446,6 @@ if botao_recomendar:
     if not mood.strip():
         st.warning("✦ Descreva como você está se sentindo para receber sugestões personalizadas.")
     else:
-        # Animação de loading customizada
         loader_placeholder = st.empty()
         loader_placeholder.markdown(
             """
@@ -480,13 +502,11 @@ if botao_recomendar:
                 for i, f in enumerate(filmes, 1):
                     st.markdown(render_card(i, f["titulo"], f["ano"], f["motivo"]), unsafe_allow_html=True)
             else:
-                # Fallback: exibe o texto original formatado
                 st.markdown(
                     f'<div class="movie-card"><p style="line-height:1.8;">{response.text}</p></div>',
                     unsafe_allow_html=True,
                 )
 
-            # ── Feedback ──────────────────────────────────────────────────────
             st.markdown(
                 '<div class="feedback-label" style="margin-top:2rem; letter-spacing:3px; '
                 'text-transform:uppercase; font-size:0.8rem; color:#7a7288;">As sugestões foram úteis?</div>',
@@ -516,7 +536,6 @@ if botao_recomendar:
             st.error(f"⚠️ Erro ao conectar com a IA: {e}")
 
 else:
-    # Estado inicial — dica central
     st.markdown(
         """
         <div style="text-align:center; padding: 4rem 2rem; color:#3a3548;">
