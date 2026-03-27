@@ -6,12 +6,6 @@ genai.configure(api_key=st.secrets["general"]["api_key"])
 
 model = genai.GenerativeModel("gemini-3.1-flash-lite-preview")
 
-print("--- MODELOS DISPONÍVEIS ---")
-for m in genai.list_models():
-    if 'generateContent' in m.supported_generation_methods:
-        print(m.name)
-print("---------------------------")
-
 # Configuração da página
 st.set_page_config(page_title="CineIA", page_icon="🍿")
 
