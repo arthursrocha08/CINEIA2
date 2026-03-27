@@ -5,7 +5,7 @@ import re
 
 # ─── CONFIGURAÇÃO DA API ──────────────────────────────────────────────────────
 genai.configure(api_key=st.secrets["general"]["api_key"])
-model = genai.GenerativeModel("gemini-3.1-flash-lite-preview")
+model = genai.GenerativeModel("gemini-3-flash-preview")
 
 # ─── CONFIGURAÇÃO DA PÁGINA ───────────────────────────────────────────────────
 st.set_page_config(
