@@ -1,10 +1,8 @@
 import streamlit as st
 import google.generativeai as genai
-import time
-import re
 
 # ─── CONFIGURAÇÃO DA API ──────────────────────────────────────────────────────
-genai.configure(api_key="AIzaSyBS99hO6NoULRMYjdvcOBartqR_HBmt4c0")
+genai.configure(api_key=st.secrets["general"]["api_key"])
 model = genai.GenerativeModel(model_name="models/gemini-2.5-flash")
 
 # ─── CONFIGURAÇÃO DA PÁGINA ───────────────────────────────────────────────────
