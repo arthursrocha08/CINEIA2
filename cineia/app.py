@@ -4,7 +4,7 @@ import google.generativeai as genai
 # Configuração da chave
 genai.configure(api_key=st.secrets["general"]["api_key"])
 
-model = genai.GenerativeModel(model_name='models/gemini-2.5-flash')
+model = genai.GenerativeModel("gemini-3.1-flash-lite-preview")
 
 print("--- MODELOS DISPONÍVEIS ---")
 for m in genai.list_models():
