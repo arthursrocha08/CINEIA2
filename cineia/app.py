@@ -550,4 +550,4 @@ st.markdown("<br><br>", unsafe_allow_html=True)
 st.caption("Desenvolvido na disciplina de IHC · Graduação em IA e Ciência de Dados · Universidade Franciscana (UFN)")
 
 st.markdown("Acesse pelo celular:") 
-st.image("qrcode.png", caption="Escaneie para abrir o CineIA", use_column_width=True)
+st.image("qrcode.png")
