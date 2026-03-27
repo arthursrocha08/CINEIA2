@@ -307,13 +307,21 @@ st.markdown(
         letter-spacing: 1px;
     }
 
-   /* ── Hide Streamlit chrome ──────────────────────── */
+    /* ── Hide Streamlit chrome ──────────────────────── */
     #MainMenu, footer, header { visibility: hidden; }
 
-    /* ── Oculta botão de colapso da sidebar ─────────── */
+    /* ── Oculta TODOS os botões de colapso da sidebar ── */
     [data-testid="collapsedControl"],
-    button[kind="header"][aria-label="Close sidebar"] {
+    [data-testid="stSidebarCollapseButton"],
+    button[kind="header"][aria-label="Close sidebar"],
+    button[aria-label="Collapse sidebar"],
+    button[aria-label="Expandir barra lateral"],
+    button[aria-label="Recolher barra lateral"],
+    section[data-testid="stSidebar"] > div:first-child > div > button {
         display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
     </style>
     """,
     unsafe_allow_html=True,
