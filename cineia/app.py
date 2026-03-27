@@ -3,7 +3,7 @@ import google.generativeai as genai
 
 # ─── CONFIGURAÇÃO DA API ──────────────────────────────────────────────────────
 genai.configure(api_key=st.secrets["general"]["api_key"])
-model = genai.GenerativeModel(model_name="models/gemini-2.5-flash")
+model = genai.generativemodel(model_name="models/gemini-2.5-flash")
 
 # ─── CONFIGURAÇÃO DA PÁGINA ───────────────────────────────────────────────────
 st.set_page_config(
