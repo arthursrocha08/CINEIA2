@@ -307,8 +307,13 @@ st.markdown(
         letter-spacing: 1px;
     }
 
-    /* ── Hide Streamlit chrome ──────────────────────── */
+   /* ── Hide Streamlit chrome ──────────────────────── */
     #MainMenu, footer, header { visibility: hidden; }
+
+    /* ── Oculta botão de colapso da sidebar ─────────── */
+    [data-testid="collapsedControl"],
+    button[kind="header"][aria-label="Close sidebar"] {
+        display: none !important;
     </style>
     """,
     unsafe_allow_html=True,
